@@ -1,9 +1,12 @@
 import './index.css'
+import Sidebar from '../../components/Sidebar'
+import Content from '../../components/Content'
 
 const Home = () => {
   return (
    <>
-      <div>Home</div>   
+      <Sidebar />  
+      <Content />
    </>
   )
 }
