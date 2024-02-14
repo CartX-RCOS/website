@@ -1,8 +1,8 @@
 .sidebar {
-   height: calc(100vh - 60px);
+   height: 88%;
    width: 20%;
 
    position: fixed;
-   top:60px;
+   top:12%;
    background-color: lightblue;
 }

@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Database from './pages/Database'
 import Error from './pages/Error'
-import Layout from './components/Layout'
+import Layout from './components/Layout/Layout'
 import './App.css'
 
 function App() {
