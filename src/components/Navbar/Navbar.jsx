@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import SearchBar from '../SearchBar/SearchBar'
+import img from '../../assets/CartX-logos/logo-transparent-png.png'
 import './Navbar.css'
 
 const NavBar = () => {
@@ -10,7 +11,9 @@ const NavBar = () => {
    <div className="header">
       <Navbar className="navbar">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand href="#home">
+            <img className="logo" src={ img } alt="CartX Logo" width="60"height="60"/>
+          </Navbar.Brand>
           <SearchBar className="searchbar"/>
           <Nav className="me-auto">
             <Nav.Link href="#home">Home</Nav.Link>
