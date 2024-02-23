@@ -5,6 +5,7 @@
    position: fixed;
    left: 20%;
    top: 65px;
+   z-index: 0;
 
    background-color: lightgreen;
 }

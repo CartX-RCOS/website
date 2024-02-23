@@ -1,10 +1,25 @@
 import './SearchBar.css'
+import { useState } from 'react';
 
 const SearchBar = () => {
-  return (
+   const [searchText, setSearchText] = useState('');
+
+   const handleInputChange = (event) => {
+      setSearchText(event.target.value);
+   };
+
+   const clearSearch = () => {
+      setSearchText('');
+   };
+   return (
    <>
       <div class="search">
-         <input type="text" class="search__input" placeholder="Search"/>
+         <input type="text" class="search__input" placeholder="Search" value={searchText} onChange={handleInputChange}/>
+         {searchText && (
+          <button className="search__clear" onClick={clearSearch}>
+            x
+          </button>
+        )}
          <button class="search__button">
          <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24">
             <g>
