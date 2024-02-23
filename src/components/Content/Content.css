@@ -1,10 +1,10 @@
 .content {
-   width: 80%;
-   height: 88%;
+   width: 80vw;
+   height: 100vh;
 
    position: fixed;
    left: 20%;
-   top: 12%;
+   top: 65px;
 
    background-color: lightgreen;
 }
