@@ -1,13 +1,11 @@
 .search {
   display: flex;
   position: relative;
-  align-items: center;
-  justify-content: center;
+  place-content: center;
   text-align: center;
   height: 48.75px;
-  width: 96%; 
-  min-width: 40%;;
-
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search__clear {
@@ -35,30 +33,52 @@
   font-family: inherit;
   font-size: inherit;
   background-color: #f4f4f4;
-  border: none;
+  border: 1px solid transparent;
+  border-right: none;
+  box-sizing: border-box;
   color: #646464;
   padding: 0.7rem 1rem;
-  border-bottom-left-radius: 30px;
-  border-top-left-radius: 30px;
+  padding-right: auto;
+  border-radius: 30px;
   height: 100%;
-  width: calc(100% - 2rem);
+  width:100%;
+  min-width: 200px;
   transition: all ease-in-out .5s;
+}
+
+.search__button {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border: 1px solid transparent;
+  border-left: none;
   box-sizing: border-box;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  transition: all ease-in-out .5s;
+  height: 100%;
+  padding: 0.7rem 1rem;
+  
+  position: absolute;
+  z-index: 1;
+  right: 0;
 }
 
-.search__input:hover,
-.search__input:focus {
-  box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.2),
-    0 0 0.1em rgba(0, 0, 0, 0.2);
+.search__input:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.search__input:focus+.search__button {
-  box-shadow: inset 0 0 0.1em rgba(0, 0, 0, 0.2),
-    0 0 0.1em rgba(0, 0, 0, 0.2);
+.search__input:focus + .search__button {
+  box-shadow: none;
+  border: 1px solid black;
+  border-left: none;
+  background-color: #f0eeee;
 }
 
 .search__input:focus {
   outline: none;
+  border: 1px solid black;
+  border-right: none;
   background-color: #f0eeee;
 }
 
@@ -67,34 +87,16 @@
   color: #7f7d7d;
 }
 
-.search__input:focus+.search__button {
-  outline: none;
-  background-color: #fafafa;
-}
 
-.search__button {
-  border: none;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  box-sizing: border-box;
-  background-color: #f4f4f4;
-  display: flex;
-  align-items: center;
-  transition: all ease-in-out .5s;
-  height: 100%;
-  padding: 0.7rem 1rem;
-}
-
+.search__input:focus + .search__button:hover,
 .search__button:hover {
   cursor: pointer;
-  background-color: #ebebeb;
+  background-color: #e8e8e8f9;
 }
 
 .search__button:focus {
-  border: none;
-  outline: none;
-
-  background-color: #e3e3e3;
+  outline:none;
+  background-color: #d3d3d3;
 }
 
 .search__icon {
