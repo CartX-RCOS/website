@@ -9,6 +9,7 @@
     background: rgba(0,0,0,0.5);
     filter: transparency(50%);
     transition: transparency 0.5s ease;
+    cursor: default;
 }
 
 

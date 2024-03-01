@@ -5,14 +5,15 @@ import { useState } from 'react';
 import {TiLocation} from "react-icons/ti";
 import './Navbar.css'
 
-const NavBar = ({ address, changeAddress}) => {
+const NavBar = ({setAddress}) => {
   const [showPopup, setShowPopup] = useState(false);
-  
+
   const handleButtonClick = () => {
     setShowPopup(true);
   };
 
-  const handleClosePopup = () => {
+  const handleClosePopup = (e) => {
+    e.preventDefault();
     setShowPopup(false);
   };
 
@@ -21,7 +22,7 @@ const NavBar = ({ address, changeAddress}) => {
     <div className="navbar">
         <div className="left">
           <div className="burger_div">
-            <label className="burger" for="burger">
+            <label className="burger" htmlFor="burger">
               <input type="checkbox" id="burger"/>
               <span></span>
               <span></span>
@@ -42,11 +43,11 @@ const NavBar = ({ address, changeAddress}) => {
             <button id="address_button">
               <TiLocation size={36} />
             </button>
-            {showPopup && <AddressPopup onClose={handleClosePopup}/>}
             <div className="text_div">
               {localStorage.getItem('address')}
             </div>
           </div>
+          {showPopup && <AddressPopup onClose={handleClosePopup} setAddress={setAddress}/>}
         </div>
     </div>    
    </>

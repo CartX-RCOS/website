@@ -3,36 +3,64 @@ import './index.css'
 import NavBar from '../../components/Navbar/Navbar'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Content from '../../components/Content/Content'
+import axios from 'axios';
 
 const Home = () => {
   const [address, setAddress] = useState();
 
+  const parseAddress = (address) => {
+    var regex = /([^,]+),\s*([A-Za-z]{2})\s*(\d{5})/;
+    var match = address.match(regex);
+
+    if (match) {
+      var city = match[1].trim();
+      var zipCode = match[3].trim();
+      return city + " " + zipCode ;
+    } else {
+      return null;
+    }
+  }
+
+  const getAddress = async (address) => {
+    try {
+      const response = await axios.post("http://localhost:8080/convertCoordinates", { location: address });
+      return response.data;
+
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(async function (position) {
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
-        setAddress(latitude);
+
+        let data = await getAddress([latitude, longitude]);
+        console.log(data);
+        setAddress(data);
       });
     }
     else {
       console.log("Geolocation is not supported by this browser.");
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    if (address){
+    if (address) {
+      setAddress(parseAddress(address));
       localStorage.setItem('address', address);
     }
   }, [address]);
 
   return (
-   <>
-      <Sidebar />  
-      <Content className="content"/>
-      <NavBar />
-   </>
+    <>
+      <Sidebar />
+      <Content className="content" />
+      <NavBar changeAddress={setAddress}/>
+    </>
   )
 }
 

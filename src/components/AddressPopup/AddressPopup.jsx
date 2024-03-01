@@ -3,16 +3,19 @@ import "./AddressPopup.css";
 import {TiTimes} from "react-icons/ti";
 import { SlMagnifier} from "react-icons/sl";
 
-function AddressPopup({ onClose, trigger, setAddress}) {
+function AddressPopup(props) {
     const body = document.querySelector('body');
     const inputRef = useRef(null);
     const [searchQuery, setSearchQuery] = useState('');
-    const [submitQuery, setSubmitQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+
+    useEffect(() => {
+        body.style.overflow = 'hidden';
+        inputRef.current.focus();
+    }); 
 
     const handleInputChange = async (e) => {
         const query = e.target.value;
-        setSubmitQuery(query);
         setSearchQuery(query);
 
         const bing_key = process.env.REACT_APP_BING_KEY;
@@ -28,7 +31,7 @@ function AddressPopup({ onClose, trigger, setAddress}) {
         const suggestion = await response.json();
 
         let allSuggestions= suggestion.resourceSets[0].resources[0].value;
-        let addresses = []
+        let addresses = [];
         for (let i = 0; i < allSuggestions.length; i++){
             addresses.push(allSuggestions[i].address.formattedAddress);
         }
@@ -38,22 +41,20 @@ function AddressPopup({ onClose, trigger, setAddress}) {
             console.log('Error:', e);
         }
         
-        
         } else {
-        setSuggestions([]); // Clear suggestions if the search query is empty
+            setSuggestions([]); // Clear suggestions if the search query is empty
         }
   };
 
   const handleSuggestionClick = (suggestion) => {
-    setSubmitQuery(suggestion);
     setSearchQuery(suggestion); // Populate the input with selected suggestion
     setSuggestions([]); // Clear suggestions
   };
   
     const handleAddressSubmit = (e) => {
         e.preventDefault(); // Prevents the default form submission behavior
-        setAddress(submitQuery);
-        setSubmitQuery('')
+        props.setAddress(e);
+        setSearchQuery('')
     };
 
     const buttonClick = () => {
@@ -64,20 +65,11 @@ function AddressPopup({ onClose, trigger, setAddress}) {
           inputRef.current.focus();
         }
       };
-    useEffect(() => {
-        if (trigger){
-            body.style.overflow = 'hidden';
-            inputRef.current.focus();
-        }
-        else{
-            body.style.overflow = '';
-        }
-    }); 
     return (
         <div className="overlay">
             <div className="address-popup">
                 <div className="top">
-                    <button className="close-address" onClick={onClose}>
+                    <button className="close-address" onClick={props.onClose}>
                         <TiTimes size={30} color="rgb(101, 101, 101)"/>
                     </button>
                 
@@ -92,7 +84,6 @@ function AddressPopup({ onClose, trigger, setAddress}) {
                         className="address-search"
                         value={searchQuery}
                         onChange={handleInputChange}/>
-
 
                     <button onClick={buttonClick} className="search-button">
                         {searchQuery ? <TiTimes size ={20}/> : <SlMagnifier/>}
