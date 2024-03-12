@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 
 
-const Sidebar = ({ setSelectedOption}) => {
+const Sidebar = ({ setSelectedOption, showSidebar }) => {
   // State to track the selected menu item, defaulting to 'general'
   const [selectedItem, setSelectedItem] = useState('general');
   // console.log("SIDEBAR: ",selectedAddress);
@@ -15,7 +15,7 @@ const Sidebar = ({ setSelectedOption}) => {
 
   return (
     <>
-      <div className="sidebar">
+      <div className="sidebar" style={!showSidebar ? { width: "0vw" } : null}>
         <div className="sidebar-header">
         </div>
 

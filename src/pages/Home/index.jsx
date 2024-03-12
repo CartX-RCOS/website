@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const Home = () => {
   const [address, setAddress] = useState();
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const parseAddress = (address) => {
     var regex = /([^,]+),\s*([A-Za-z]{2})\s*(\d{5})/;
@@ -57,12 +58,12 @@ const Home = () => {
 
   return (
     <>
-      <Sidebar />
-      <Content className="content" />
-      <NavBar changeAddress={setAddress}/>
+      <Sidebar showSidebar={showSidebar} />
+      <Content className="content" sidebar={showSidebar} />
+      <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} />
     </>
   )
 }
 
-export default Home
+export default Home;
 
