@@ -1,0 +1,12 @@
+.content {
+   width: 80vw;
+   height: 100vh;
+
+   position: fixed;
+   left: 20%;
+   top: 65px;
+   z-index: 0;
+
+   background-color: lightgreen;
+   transition: all 0.4s;
+}

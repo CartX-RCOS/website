@@ -1,0 +1,196 @@
+.overlay {
+    display: flex;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    filter: transparency(50%);
+    transition: transparency 0.5s ease;
+    cursor: default;
+}
+
+
+.address-popup {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+
+    width: 50%;
+    height: 75%;
+    min-height: 350px;
+    background-color: white;
+
+    border-radius: 20px;
+    border: 1px solid rgb(148, 148, 148);
+    box-shadow:
+        0 0 30px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+.top {
+    display: grid;
+    flex: 1;
+    grid-template-columns: 1fr 8fr 1fr;
+    height: 44px;
+    align-items: flex-start;
+}
+
+.header {
+    grid-column: 2;
+    place-content: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    font-family: inherit;
+    font-size: 2vi;
+    font-weight: bold;
+
+    height: 100%
+}
+
+.close-address {
+    background-color: transparent;
+    grid-column: 3;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+
+
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-address:hover {
+    background-color: rgb(234, 234, 234);
+}
+
+.close-address:focus {
+    outline: none;
+}
+
+
+.search-container {
+    display: flex;
+    align-items: center;
+    margin-top:14px;
+    height: 40px;
+    position: relative;
+}
+
+.address-search {
+    width: calc(100% - 40px);
+    display: flex;
+    padding-left: 16px;
+    font-size: 16px;
+    font-family: inherit;
+    height: 40px;
+    box-shadow:
+        0 0 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(222, 192, 192, 0.05);
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 30px;
+    place-content: center;
+    overflow: hidden;
+    margin: 0 20px;
+    transition: border-color 0.3s ease;
+}
+
+.search-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    right: 34px;
+    border: none;
+    border-left: 0.1px solid rgb(203, 203, 203);
+    background-color: transparent;
+
+    width: 38px;
+    height: 100%;
+
+
+    margin: 0;
+    cursor: pointer;
+}
+
+.search-button:focus {
+    outline:none;
+}
+
+.address-search:focus {
+    border-color: rgb(179, 179, 179);
+    outline: none;
+}
+
+.suggestions-container {
+    position: relative;
+    margin-top: 10px;
+    /* Adjust as needed */
+    flex: 4;
+}
+
+.suggestions {
+    /* position: absolute; */
+    top: 100%;
+    /* Position suggestions below the input */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1;
+    /* Ensure suggestions appear above other elements */
+}
+
+.suggestion_line {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+
+    box-shadow:
+        0 0 4px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.suggestion_line:hover {
+    background-color: #f0f0f0;
+    /* Change background on hover */
+}
+
+
+#x {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 74px;
+    border: none;
+    background-color: transparent;
+
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#x:focus {
+    outline: none;
+}

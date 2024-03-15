@@ -1,0 +1,219 @@
+.navbar {
+   height: 65px;
+   width: 100%;
+   position: fixed;
+   padding: 0;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 0 auto;
+}
+
+.left,
+.right,
+.middle {
+   display: flex;
+}
+
+/* ------------------------------------------------------LEFT--------------------------------------------------------- */
+
+.left {
+   flex: 1;
+   height: 100%;
+   width: 100%;
+   position: relative;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   margin: 0;
+   padding-left: 20px;
+}
+
+.logo_div {
+   width: 100%;
+   height: 100%;
+   position: relative;
+}
+
+.logo {
+   position: absolute;
+   top: 5px;
+}
+
+.burger_div {
+   width: 50px;
+ }
+ 
+ .burger {
+   position: relative;
+   width: 30px;
+   height: 20px;
+   background: transparent;
+   cursor: pointer;
+   display: block;
+   margin: 0;
+ }
+ 
+ .burger input {
+   display: none;
+ }
+ 
+ .burger span {
+   display: block;
+   position: absolute;
+   height: 2px;
+   width: 100%;
+   background: black;
+   border-radius: 9px;
+   opacity: 1;
+   transition: 0.25s ease-in-out;
+ }
+ 
+ /* Initial state styles (X icon) */
+ .burger span:nth-of-type(1) {
+   top: 20px;
+   transform-origin: left center;
+   transform: rotate(-45deg) translateX(2px); /* Increased translation for better spacing */
+ }
+ 
+ .burger span:nth-of-type(2) {
+   top: 50%;
+   opacity: 0;
+   width: 0%;
+ }
+ 
+ .burger span:nth-of-type(3) {
+   top: -4px;
+   transform-origin: left center;
+   transform: rotate(45deg) translateX(2px); /* Increased translation for better spacing */
+ }
+ 
+ /* Checked state styles (Hamburger menu) */
+ .burger input:checked~span:nth-of-type(1) {
+   top: 0%;
+   transform-origin: left center;
+   transform: rotate(0);
+ }
+ 
+ .burger input:checked~span:nth-of-type(2) {
+   top: 50%;
+   opacity: 1;
+   width: 100%;
+ }
+ 
+ .burger input:checked~span:nth-of-type(3) {
+   top: 100%;
+   transform-origin: left center;
+   transform: rotate(0);
+ }
+ 
+
+
+/* ------------------------------------------------------MIDDLE---------------------------------------------------------- */
+
+
+.middle {
+   height: 100%;
+   flex: 2;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 0;
+}
+
+
+/* ----------------------------------------------------- RIGHT ------------------------------------------------------------- */
+
+
+.right {
+   flex: 1;
+   height: 100%;
+   justify-content: space-between;
+   align-items: center;
+   margin: 0;
+
+}
+
+.address_div {
+   margin-left: 20px;
+   margin-right: 10px;
+   width: auto;
+   height: 60px;
+
+   border: none   ;
+   border-radius: 8px;
+
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   padding: 0 10px;  
+
+   cursor: pointer;
+}
+
+.address_div:hover {
+   background-color: rgb(244, 244, 244);
+}
+
+#address_button {
+   height: 50px;
+   width: 50px;
+   border-radius: 50%;
+   margin-left: 23px;
+   background-color: inherit;
+   border: none;
+   transition: background-color 0.25s ease-in-out;
+}
+
+#address_button:hover {
+   background-color: rgb(244, 244, 244);
+}
+
+#address_button:focus {
+   background-color: rgb(219, 219, 219);
+   outline: none;
+}
+
+
+.text_div {
+   height: 100%;
+   max-width: 200px;
+   width:auto;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipse;
+   display: flex;
+   align-items: center;
+   margin-left: 5px;
+}
+
+.analyze {
+   padding: 1.3em 3em;
+   font-size: 12px;
+   text-transform: uppercase;
+   letter-spacing: 2.5px;
+   font-weight: 500;
+   color: #ffffff;
+   background-color: #23c483;
+   border: none;
+   border-radius: 45px;
+   box-shadow: 0px 8px 15px rgba(212, 208, 208, 0.1);
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+   outline: none;
+   margin-right: 18px;
+
+   width: 40%;
+   text-align: center;
+ }
+ 
+ .analyze:hover {
+   background-color: #00bf73;
+   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+   color: #fff;
+   transform: translateY(-2px);
+ }
+ 
+ .analyze:active {
+   transform: translateY(-1px);
+ }
