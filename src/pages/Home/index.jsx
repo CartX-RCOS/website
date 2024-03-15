@@ -26,7 +26,6 @@ const Home = () => {
     try {
       const response = await axios.post("http://localhost:8080/convertCoordinates", { location: address });
       return response.data;
-
     } catch (e) {
       console.log(e);
     }
@@ -39,8 +38,7 @@ const Home = () => {
         let longitude = position.coords.longitude;
 
         let data = await getAddress([latitude, longitude]);
-        console.log(data);
-        setAddress(data);
+        setAddress(parseAddress(data));
       });
     }
     else {
@@ -51,7 +49,7 @@ const Home = () => {
 
   useEffect(() => {
     if (address) {
-      setAddress(parseAddress(address));
+      setAddress(address);
       localStorage.setItem('address', address);
     }
   }, [address]);

@@ -119,7 +119,7 @@
 .right {
    flex: 1;
    height: 100%;
-   justify-content: flex-start;
+   justify-content: space-between;
    align-items: center;
    margin: 0;
 
@@ -127,15 +127,17 @@
 
 .address_div {
    margin-left: 20px;
-   width: 150px;
+   margin-right: 10px;
+   width: auto;
    height: 60px;
 
-   border: 1px solid rgb(182, 182, 182);
+   border: none   ;
    border-radius: 8px;
 
    display: flex;
    flex-direction: row;
    align-items: center;
+   padding: 0 10px;  
 
    cursor: pointer;
 }
@@ -148,10 +150,9 @@
    height: 50px;
    width: 50px;
    border-radius: 50%;
-
+   margin-left: 23px;
    background-color: inherit;
    border: none;
-
    transition: background-color 0.25s ease-in-out;
 }
 
@@ -167,7 +168,43 @@
 
 .text_div {
    height: 100%;
-   width: auto;
+   max-width: 200px;
+   width:auto;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipse;
    display: flex;
    align-items: center;
+   margin-left: 5px;
 }
+
+.analyze {
+   padding: 1.3em 3em;
+   font-size: 12px;
+   text-transform: uppercase;
+   letter-spacing: 2.5px;
+   font-weight: 500;
+   color: #ffffff;
+   background-color: #23c483;
+   border: none;
+   border-radius: 45px;
+   box-shadow: 0px 8px 15px rgba(212, 208, 208, 0.1);
+   transition: all 0.3s ease 0s;
+   cursor: pointer;
+   outline: none;
+   margin-right: 18px;
+
+   width: 40%;
+   text-align: center;
+ }
+ 
+ .analyze:hover {
+   background-color: #00bf73;
+   box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+   color: #fff;
+   transform: translateY(-2px);
+ }
+ 
+ .analyze:active {
+   transform: translateY(-1px);
+ }

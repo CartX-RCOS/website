@@ -1,21 +1,23 @@
-import SearchBar from "../SearchBar/SearchBar";
-import AddressPopup from "../AddressPopup/AddressPopup";
-import img from "../../assets/CartX-logos/Updated Logos/logo-transparent-png.png";
-import { useState } from "react";
+import SearchBar from '../SearchBar/SearchBar'
+import AddressPopup from '../AddressPopup/AddressPopup';
+import img from '../../assets/CartX-logos/Updated Logos/logo-transparent-png.png'
+import { useState } from 'react';
 import { TiLocation } from "react-icons/ti";
-import "./Navbar.css";
+import './Navbar.css'
 
-const NavBar = ({ setAddress, setShowSidebar }) => {
+const NavBar = (props) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const handleButtonClick = () => {
     setShowPopup(true);
   };
 
-  const handleClosePopup = (e) => {
-    e.preventDefault();
+  const handleClosePopup = () => {
     setShowPopup(false);
   };
+
+  const address = localStorage.getItem('address');
+  const isAddressUndefined = address === undefined || address === null;
 
   return (
     <>
@@ -39,19 +41,25 @@ const NavBar = ({ setAddress, setShowSidebar }) => {
         </div>
 
         <div className="right">
-          <div className="address_div" onClick={handleButtonClick}>
-            <button id="address_button">
+          {isAddressUndefined ? (
+            <button id="address_button" onClick={handleButtonClick}>
               <TiLocation size={36} />
             </button>
-            <div className="text_div">{localStorage.getItem("address")}</div>
-          </div>
-          {showPopup && (
-            <AddressPopup onClose={handleClosePopup} setAddress={setAddress} />
+          ) : (
+            <div className="address_div" onClick={handleButtonClick}>
+              <TiLocation size={36} style={{ color: 'black' }} />
+              <div className="text_div">
+                {address}
+              </div>
+            </div>
           )}
+          {showPopup && <AddressPopup onClose={handleClosePopup} setAddress={props.setAddress} />}
+
+          <button className="analyze"> Analyze </button>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 export default NavBar;
