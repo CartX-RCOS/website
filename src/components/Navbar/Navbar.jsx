@@ -23,7 +23,7 @@ const NavBar = (props) => {
     <>
       <div className="navbar">
         <div className="left">
-          <div className="burger_div" onClick={() => setShowSidebar(document.getElementById('burger').checked ? false : true)}>
+          <div className="burger_div" onClick={() => props.setShowSidebar(document.getElementById('burger').checked ? false : true)}>
             <label className="burger" htmlFor="burger">
               <input type="checkbox" id="burger" />
               <span></span>
