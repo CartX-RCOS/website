@@ -5,6 +5,7 @@
    top: 65px;
    position: fixed;
    background-color: lightblue;
+   transition: all 0.4s;
 }
 
 /* .sidebar {

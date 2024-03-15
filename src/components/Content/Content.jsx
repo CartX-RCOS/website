@@ -1,9 +1,9 @@
 import './Content.css'
 
-const Content = () => {
+const Content = ({ sidebar }) => {
   return (
    <>
-      <div className="content">Content</div>   
+      <div className="content" style={!sidebar ? { width: "100vw", left: "0%" } : null }>Content</div>   
    </>
   )
 }
