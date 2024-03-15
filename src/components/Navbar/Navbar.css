@@ -42,9 +42,9 @@
 
 .burger_div {
    width: 50px;
-}
-
-.burger {
+ }
+ 
+ .burger {
    position: relative;
    width: 30px;
    height: 20px;
@@ -52,13 +52,13 @@
    cursor: pointer;
    display: block;
    margin: 0;
-}
-
-.burger input {
+ }
+ 
+ .burger input {
    display: none;
-}
-
-.burger span {
+ }
+ 
+ .burger span {
    display: block;
    position: absolute;
    height: 2px;
@@ -67,37 +67,46 @@
    border-radius: 9px;
    opacity: 1;
    transition: 0.25s ease-in-out;
-}
-
-.burger span:nth-of-type(1) {
-   top: 0%;
-   transform-origin: left center;
-}
-
-.burger span:nth-of-type(2) {
-   top: 50%;
-   transform-origin: center center;
-}
-
-.burger span:nth-of-type(3) {
-   top: 100%;
-   transform-origin: left center;
-}
-
-.burger input:checked~span:nth-of-type(1) {
-   transform: rotate(-45deg) translateX(2px);
+ }
+ 
+ /* Initial state styles (X icon) */
+ .burger span:nth-of-type(1) {
    top: 20px;
-}
-
-.burger input:checked~span:nth-of-type(2) {
+   transform-origin: left center;
+   transform: rotate(-45deg) translateX(2px); /* Increased translation for better spacing */
+ }
+ 
+ .burger span:nth-of-type(2) {
+   top: 50%;
    opacity: 0;
    width: 0%;
-}
-
-.burger input:checked~span:nth-of-type(3) {
-   transform: rotate(45deg) translateX(2px);
+ }
+ 
+ .burger span:nth-of-type(3) {
    top: -4px;
-}
+   transform-origin: left center;
+   transform: rotate(45deg) translateX(2px); /* Increased translation for better spacing */
+ }
+ 
+ /* Checked state styles (Hamburger menu) */
+ .burger input:checked~span:nth-of-type(1) {
+   top: 0%;
+   transform-origin: left center;
+   transform: rotate(0);
+ }
+ 
+ .burger input:checked~span:nth-of-type(2) {
+   top: 50%;
+   opacity: 1;
+   width: 100%;
+ }
+ 
+ .burger input:checked~span:nth-of-type(3) {
+   top: 100%;
+   transform-origin: left center;
+   transform: rotate(0);
+ }
+ 
 
 
 /* ------------------------------------------------------MIDDLE---------------------------------------------------------- */
