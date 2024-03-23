@@ -1,18 +1,25 @@
-import './SearchBar.css'
+import './SearchBar.css';
+import axios from 'axios';
 import { useState, useRef } from 'react';
 
 const SearchBar = (props) => {
    const [searchText, setSearchText] = useState('');
    const inputRef = useRef(null);
+   const stores = props.stores;
 
    const handleInputChange = (event) => {
       event.preventDefault();
       setSearchText(event.target.value);
    };
 
-   const handleSubmit = (event) => {
-      if (searchText != ""){
-         console.log(searchText);
+   const handleSubmit = async (event) => {
+      if (searchText !== ""){
+         try {
+            const response = await axios.post("http://localhost:8080/getPairedItems", {stores : stores, searchQuery : searchText });
+            props.setData(response.data);
+          } catch (e) {
+            console.log(e);
+          }
          inputRef.current.blur();
       }
    }

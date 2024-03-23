@@ -8,6 +8,8 @@ import './Navbar.css'
 const NavBar = (props) => {
   const [showPopup, setShowPopup] = useState(false);
 
+  const stores = props.stores;
+
   const handleButtonClick = () => {
     setShowPopup(true);
   };
@@ -37,7 +39,7 @@ const NavBar = (props) => {
         </div>
 
         <div className="middle">
-          <SearchBar className="search" />
+          <SearchBar className="search" setData={props.setData} stores={stores}/>
         </div>
 
         <div className="right">
