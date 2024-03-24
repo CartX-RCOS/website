@@ -10,7 +10,7 @@
 .card {
     flex-shrink: 0;
     position: relative; /* Needed for absolute positioning of children */
-    height: auto;
+    height: 300px;
     width: 250px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
