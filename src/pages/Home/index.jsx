@@ -9,7 +9,7 @@ const Home = () => {
   const [address, setAddress] = useState();
   const [showSidebar, setShowSidebar] = useState(true);
   const [data, setData] = useState();
-  const [stores, setStores] = useState(['cvs', 'hannaford']);
+  const [stores, setStores] = useState(['walgreens', 'cvs', 'hannaford']);
 
   const parseAddress = (address) => {
     var regex = /([^,]+),\s*([A-Za-z]{2})\s*(\d{5})/;
