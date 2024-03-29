@@ -8,6 +8,8 @@ import axios from 'axios';
 const Home = () => {
   const [address, setAddress] = useState();
   const [showSidebar, setShowSidebar] = useState(true);
+  const [data, setData] = useState();
+  const [stores, setStores] = useState(['walgreens', 'cvs', 'hannaford']);
 
   const parseAddress = (address) => {
     var regex = /([^,]+),\s*([A-Za-z]{2})\s*(\d{5})/;
@@ -56,9 +58,9 @@ const Home = () => {
 
   return (
     <>
-      <Sidebar showSidebar={showSidebar} />
-      <Content className="content" sidebar={showSidebar} />
-      <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} />
+      <Sidebar showSidebar={showSidebar} setStores={setStores}/>
+      <Content className="content" sidebar={showSidebar} data={data}/>
+      <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} setData={setData} stores={stores}/>
     </>
   )
 }

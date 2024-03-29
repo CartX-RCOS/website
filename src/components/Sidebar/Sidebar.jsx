@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 
 
-const Sidebar = ({ setSelectedOption, showSidebar }) => {
+const Sidebar = ({ setSelectedOption, showSidebar, setStores }) => {
   // State to track the selected menu item, defaulting to 'general'
   const [selectedItem, setSelectedItem] = useState('general');
   // console.log("SIDEBAR: ",selectedAddress);
-
+  
   // Function to handle menu item clicks
   const handleMenuItemClick = (itemName) => {
     setSelectedItem(itemName);
