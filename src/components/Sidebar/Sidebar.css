@@ -5,6 +5,8 @@
    top: 65px;
    position: fixed;
    transition: all 0.4s;
+   background-color: rgb(236, 236, 236);
+
 }
 
 /* .sidebar {
@@ -46,16 +48,19 @@
  }
  
  .menu-item {
-   display: flex;
-   align-items: center;
-   padding: 10px 20px;
-   font-size: 1em;
-   color: #333;
-   background: transparent;
-   border: none;
-   text-align: left;
-   cursor: pointer;
-   transition: background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #333;
+    background: transparent;
+    border: none;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; 
+    padding: 10px; 
+    cursor: pointer;
+    transition: background-color 0.3s;
  }
  
  .menu-item:hover {
@@ -69,7 +74,6 @@
  
  .menu-item.selected {
    /* background-color: rgb(26,128,229); */
-   color: white;
  }
 
  .store_logo {
@@ -89,8 +93,7 @@
 }
 
 .container {
-  display: block;
-  position: relative;
+  align-items: center;
   cursor: pointer;
   font-size: 1.5rem;
   user-select: none;
@@ -100,8 +103,7 @@
 .checkmark {
   --clr: #0B6E4F;
   position: relative;
-  top: 0;
-  left: 0;
+  float: right;
   height: 1.5em;
   width: 1.5em;
   background-color: #ccc;

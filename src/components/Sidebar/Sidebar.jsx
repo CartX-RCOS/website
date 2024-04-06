@@ -5,42 +5,37 @@ import walgreens_logo from '../../assets/Store-logos/walgreens.png';
 import hannaford_logo from '../../assets/Store-logos/hannaford.png';
 import './Sidebar.css';
 
-const Sidebar = ({ setSelectedOption, showSidebar, setStores }) => {
-  const [selectedStores, setSelectedStores] = useState(['CVS', 'Shoprite', 'Walgreens', 'Hannaford']);
-  const [checked, setChecked] = React.useState(false);
-
-  const handleChange = () => {
-    setChecked(!checked);
-  };
+const Sidebar = ({ showSidebar, setStores }) => {
+  const [selectedStores, setSelectedStores] = useState([
+    { name: 'cvs', logo: cvs_logo, checked: true }, // Set all checked by default
+    { name: 'shoprite', logo: shoprite_logo, checked: true },
+    { name: 'walgreens', logo: walgreens_logo, checked: true },
+    { name: 'hannaford', logo: hannaford_logo, checked: true },
+  ]);
 
   useEffect(() => {
     // Assuming setStores expects an array of selected store names
-    setStores(selectedStores);
+    const selectedStoreNames = selectedStores.filter(store => store.checked).map(store => store.name);
+    setStores(selectedStoreNames);
   }, [selectedStores, setStores]);
 
   const toggleStoreSelection = (store) => {
-    setSelectedStores(current => 
-      current.includes(store) ? current.filter(s => s !== store) : [...current, store]
+    setSelectedStores(current =>
+      current.map(item => (item.name === store ? { ...item, checked: !item.checked } : item))
     );
   };
-
-  const storeData = [
-    { name: 'CVS', logo: cvs_logo },
-    { name: 'Shoprite', logo: shoprite_logo },
-    { name: 'Walgreens', logo: walgreens_logo },
-    { name: 'Hannaford', logo: hannaford_logo },
-  ];
 
   return (
     <>
       <div className="sidebar" style={!showSidebar ? { width: "0" } : {}}>
         <div className="sidebar-header"></div>
         <div className="sidebar-menu">
-          {storeData.map((store, index) => (
-            <div key={index} className={`menu-item ${selectedStores.includes(store.name) ? 'selected' : ''}`} onClick={() => toggleStoreSelection(store.name)}>
-              <img src={store.logo} alt={store.name} className="store_logo"/>
+          {selectedStores.map((store, index) => (
+            <div key={index} className={`menu-item ${store.checked ? 'selected' : ''}`} onClick={() => toggleStoreSelection(store.name)}>
+              <img src={store.logo} alt={store.name} className="store_logo" />
+              {store.name.charAt(0).toUpperCase() + store.name.slice(1)}
               <label class="container">
-                <input type="checkbox" checked={checked} onChange={handleChange}/>
+                <input type="checkbox" checked={store.checked} onChange={() => toggleStoreSelection(store.name)} />
                 <div class="checkmark"></div>
               </label>
             </div>
