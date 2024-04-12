@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Card.css';
 
-const Card = ({ data }) => {
+const Card = (props) => {
   const [imageSrc, setImageSrc] = useState('');
   const [productSize, setProductSize] = useState('');
 
@@ -16,15 +16,15 @@ const Card = ({ data }) => {
     };
 
     const findValidImage = async () => {
-      for (let url of data.images_links) {
+      for (let url of props.data.images_links) {
         if (await checkImage(url)) {
           setImageSrc(url);
           return;
         }
       }
 
-      for (let matchKey in data.matches) {
-        for (let url of data.matches[matchKey].images_links) {
+      for (let matchKey in props.data.matches) {
+        for (let url of props.data.matches[matchKey].images_links) {
           if (await checkImage(url)) {
             setImageSrc(url);
             return;
@@ -36,27 +36,41 @@ const Card = ({ data }) => {
     findValidImage();
     const formatProductSize = () => {
       // Check if data.size contains any number
-      const containsNumber = /\d/.test(data.size);
-      if (!containsNumber && data.size && data.quantity) {
+      const containsNumber = /\d/.test(props.data.size);
+      if (!containsNumber && props.data.size && props.data.quantity) {
         // Combine data.quantity and data.size if data.size has no number
-        return `${data.quantity} ${data.size}`;
+        return `${props.data.quantity} ${props.data.size}`;
       }
       // Return original size if condition not met
-      return data.size;
+      return props.data.size;
     };
 
      setProductSize(formatProductSize());
-  }, [data.images_links, data.matches, data.size, data.quantity]);
+  }, [props.data.images_links, props.data.matches, props.data.size, props.data.quantity]);
 
+
+  const [isAdded, setIsAdded] = useState(false); // State to track if added to cart
+
+  const handleAddToCart = () => {
+    props.addToCart(props.product);
+    setIsAdded(true); // Update state to indicate product is added
+  };
 
   
 
   return (
     <>
       <div className="product-card">
+        <button
+          className={`addToCart ${isAdded || props.isInCartPage ? 'added' : ''}`}
+          onClick={handleAddToCart}
+          aria-label={isAdded || props.isInCartPage ? "Added to cart" : "Add to cart"}
+      >
+          {isAdded || props.isInCartPage ? '✓' : '+'}
+      </button>
         <img src={imageSrc} alt="Product name"/>
         <div className="info">
-          <h3>{data.name}</h3>
+          <h3>{props.data.name}</h3>
           <p>{productSize}</p>
         </div>
       </div>

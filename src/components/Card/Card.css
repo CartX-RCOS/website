@@ -118,3 +118,27 @@
     line-height: 1.2;
     color: #333;
   }
+
+
+
+  .addToCart {
+    position: absolute; /* Positioning relative to card */
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    background-color: grey;
+    color: white;
+    padding: 5px 10px; /* Adjust size as needed */
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%; /* Circular button */
+    border: none; /* Remove default border */
+    width: 30px; /* Fixed width */
+    height: 30px; /* Fixed height */
+}
+
+.addToCart.added {
+    background-color: #4285f4; /* Green background for added state */
+    /* other styles as needed */
+}
