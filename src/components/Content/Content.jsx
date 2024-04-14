@@ -3,14 +3,16 @@ import Card from '../Card/Card';
 import './Content.css'
 
 const Content = (props) => {
-  const [cart, setCart] = useState(() => {
+    const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    return savedCart ? savedCart : [];
   });
 
   // adds to cart
   const addToCart = (product, store) => {
-    setCart(currentCart => [...currentCart, { ...product, store }]);
+
+    setCart(currentCart => [...currentCart, ...product]);
+    0console.log(cart);
   };
   return (
    <>

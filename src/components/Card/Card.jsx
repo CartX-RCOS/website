@@ -4,6 +4,7 @@ import './Card.css';
 const Card = (props) => {
   const [imageSrc, setImageSrc] = useState('');
   const [productSize, setProductSize] = useState('');
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     const checkImage = (url) => {
@@ -45,30 +46,30 @@ const Card = (props) => {
       return props.data.size;
     };
 
-     setProductSize(formatProductSize());
+    setProductSize(formatProductSize());
   }, [props.data.images_links, props.data.matches, props.data.size, props.data.quantity]);
 
 
-  const [isAdded, setIsAdded] = useState(false); // State to track if added to cart
-
   const handleAddToCart = () => {
-    props.addToCart(props.product);
-    setIsAdded(true); // Update state to indicate product is added
+    props.addToCart(props.data);
   };
 
-  
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    if (isClicked) {
+      handleAddToCart();
+    }
+  };
 
   return (
     <>
       <div className="product-card">
         <button
-          className={`addToCart ${isAdded || props.isInCartPage ? 'added' : ''}`}
-          onClick={handleAddToCart}
-          aria-label={isAdded || props.isInCartPage ? "Added to cart" : "Add to cart"}
-      >
-          {isAdded || props.isInCartPage ? '✓' : '+'}
-      </button>
-        <img src={imageSrc} alt="Product name"/>
+          className={`add-button ${isClicked ? 'checked' : ''}`}
+          aria-label="Add item"
+          onClick={handleClick}
+        />
+        <img src={imageSrc} alt="Product name" />
         <div className="info">
           <h3>{props.data.name}</h3>
           <p>{productSize}</p>
