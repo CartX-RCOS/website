@@ -1,20 +1,25 @@
 .matched-items-container {
   display: flex;
+  width: 400px;
   overflow-x: auto; 
   padding: 10px;
   gap: 10px; 
 }
+
+.product-card {
+  width: 400px;
+}
  
- .matched-item {
-    flex: 0 0 auto; 
-    width: 120px; 
-    height: 100px; 
-    background-color: #f0f0f0; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px; 
-    padding: 10px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+.matched-item {
+  flex: 0 0 auto; 
+  width: 120px; 
+  height: 100px; 
+  background-color: #f0f0f0; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px; 
+  padding: 10px; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
  
