@@ -5,7 +5,7 @@ import walgreens_logo from '../../assets/Store-logos/walgreens.png';
 import hannaford_logo from '../../assets/Store-logos/hannaford.png';
 import './Sidebar.css';
 
-const Sidebar = ({ showSidebar, setStores }) => {
+const Sidebar = ({ showSidebar, setStores, cart }) => {
   const [selectedStores, setSelectedStores] = useState([
     { name: 'cvs', logo: cvs_logo, checked: true }, // Set all checked by default
     { name: 'shoprite', logo: shoprite_logo, checked: true },
@@ -18,6 +18,10 @@ const Sidebar = ({ showSidebar, setStores }) => {
     const selectedStoreNames = selectedStores.filter(store => store.checked).map(store => store.name);
     setStores(selectedStoreNames);
   }, [selectedStores, setStores]);
+
+  useEffect(() => {
+    console.log("update");
+  }, [cart]);
 
   const toggleStoreSelection = (store) => {
     setSelectedStores(current =>
@@ -34,9 +38,9 @@ const Sidebar = ({ showSidebar, setStores }) => {
             <div key={index} className={`menu-item ${store.checked ? 'selected' : ''}`} onClick={() => toggleStoreSelection(store.name)}>
               <img src={store.logo} alt={store.name} className="store_logo" />
               {store.name.charAt(0).toUpperCase() + store.name.slice(1)}
-              <div class="container">
-                <input type="checkbox" id="cbx" checked={store.checked} onChange={() => toggleStoreSelection(store.name)}/>
-                <label for="cbx" class="check">
+              <div className="container">
+                <input type="checkbox" id="cbx" checked={store.checked} onChange={() => toggleStoreSelection(store.name)} />
+                <label htmlFor="cbx" className="check">
                   <svg width="18px" height="18px" viewBox="0 0 18 18">
                     <path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
                     <polyline points="1 9 7 14 15 4"></polyline>
@@ -46,6 +50,22 @@ const Sidebar = ({ showSidebar, setStores }) => {
             </div>
           ))}
         </div>
+        <div className="sidebar-bottom">
+            <div className="find-items">
+              <h2>Cart</h2>
+              <div className="item-list">
+                {cart.map((item, index) => (
+                  <div key={index} className="item">
+                    <img src={item.images_links[0]} alt="Item Icon" className="item-icon" />
+                    <div className="item-info">
+                      <strong>{item.name}</strong>
+                      {/* <p>{item.name}</p> */}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
       </div>
     </>
   );

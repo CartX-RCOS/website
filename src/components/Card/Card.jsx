@@ -7,34 +7,34 @@ const Card = (props) => {
   const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
-    const checkImage = (url) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(false);
-        img.src = url;
-      });
-    };
+  //   const checkImage = (url) => {
+  //     return new Promise((resolve) => {
+  //       const img = new Image();
+  //       img.onload = () => resolve(true);
+  //       img.onerror = () => resolve(false);
+  //       img.src = url;
+  //     });
+  //   };
 
-    const findValidImage = async () => {
-      for (let url of props.data.images_links) {
-        if (await checkImage(url)) {
-          setImageSrc(url);
-          return;
-        }
-      }
+    // const findValidImage = async () => {
+    //   for (let url of props.data.images_links) {
+    //     if (await checkImage(url)) {
+    //       setImageSrc(url);
+    //       return;
+    //     }
+    //   }
 
-      for (let matchKey in props.data.matches) {
-        for (let url of props.data.matches[matchKey].images_links) {
-          if (await checkImage(url)) {
-            setImageSrc(url);
-            return;
-          }
-        }
-      }
-    };
+    //   for (let matchKey in props.data.matches) {
+    //     for (let url of props.data.matches[matchKey].images_links) {
+    //       if (await checkImage(url)) {
+    //         setImageSrc(url);
+    //         return;
+    //       }
+    //     }
+    //   }
+    // };
 
-    findValidImage();
+    // findValidImage();
     const formatProductSize = () => {
       // Check if data.size contains any number
       const containsNumber = /\d/.test(props.data.size);
@@ -50,15 +50,18 @@ const Card = (props) => {
   }, [props.data.images_links, props.data.matches, props.data.size, props.data.quantity]);
 
 
-  const handleAddToCart = () => {
-    props.addToCart(props.data);
+  const handleAddToCart = (state) => {
+    if (state) {
+      props.addToCart(props.data);
+    } else {
+      props.removeFromCart(props.data);
+    }
+    
   };
 
   const handleClick = () => {
     setIsClicked(!isClicked);
-    if (isClicked) {
-      handleAddToCart();
-    }
+    handleAddToCart(!isClicked);
   };
 
   return (
@@ -69,7 +72,7 @@ const Card = (props) => {
           aria-label="Add item"
           onClick={handleClick}
         />
-        <img src={imageSrc} alt="Product name" />
+        <img src={props.data.images_links[0]} alt="Product name" />
         <div className="info">
           <h3>{props.data.name}</h3>
           <p>{productSize}</p>
