@@ -6,7 +6,7 @@ const AnalyzeStores = () => {
    const [stores, setStores] = useState([]);
 
    useEffect(() => {
-      fetch('http://localhost:8080/analyseStores')
+      fetch('/analyseStores')
          .then(response => response.json())
          .then(data => {
             const sortedStores = Object.values(data).sort((a, b) => b.averageAnalysisPoints - a.averageAnalysisPoints);

@@ -15,7 +15,7 @@ const SearchBar = (props) => {
    const handleSubmit = async (event) => {
       if (searchText !== ""){
          try {
-            const response = await axios.post("http://localhost:8080/getPairedItems", {stores : stores, searchQuery : searchText });
+            const response = await axios.post("/getPairedItems", {stores : stores, searchQuery : searchText });
             props.setData(response.data);
           } catch (e) {
             console.log(e);
