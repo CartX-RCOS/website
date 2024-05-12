@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 import './Content.css'
 
 const Content = (props) => {
-  console.log(props.data);
+  // console.log(props.data);
   return (
    <>
     <div className="content-wrapper">

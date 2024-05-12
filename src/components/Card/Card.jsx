@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useCart } from '../../CartProvider';
 import './Card.css';
 
 const Card = ({ data }) => {
+
+  // eslint-disable-next-line
+  const { cartItems, addItemToCart, removeItemFromCart } = useCart();
   const [imageSrc, setImageSrc] = useState('');
   const [productSize, setProductSize] = useState('');
 
@@ -48,8 +52,7 @@ const Card = ({ data }) => {
      setProductSize(formatProductSize());
   }, [data.images_links, data.matches, data.size, data.quantity]);
 
-
-  
+  const isInCart = cartItems.some(item => item._id === data._id);
 
   return (
     <>
@@ -57,7 +60,14 @@ const Card = ({ data }) => {
         <img src={imageSrc} alt="Product name"/>
         <div className="info">
           <h3>{data.name}</h3>
-          <p>{productSize}</p>
+          <p>Price : {data.price}</p>
+          
+          <button
+            onClick={() => isInCart ? removeItemFromCart(data) : addItemToCart(data)}
+            className={isInCart ? 'addToCart added' : 'addToCart'}>
+            {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+          </button>  
+        
         </div>
       </div>
     </>
