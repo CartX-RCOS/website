@@ -10,8 +10,8 @@
 .card {
     flex-shrink: 0;
     position: relative;
-    height: 300px;
-    width: 250px;
+    height: fit-content;
+    width: 200px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.15); /* Adjust shadow */
     display: flex;
@@ -65,7 +65,6 @@
 }
 
 .addToCart {
-    position: absolute;
     top: 10px;
     right: 10px;
     background-color: grey;
@@ -75,10 +74,7 @@
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 50%;
     border: none;
-    width: 30px;
-    height: 30px;
 }
 
 .addToCart.added {

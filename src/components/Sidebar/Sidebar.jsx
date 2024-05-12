@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { useCart } from '../../CartProvider';
 import './Sidebar.css';
-
 
 const Sidebar = ({ setSelectedOption, showSidebar, setStores }) => {
   // State to track the selected menu item, defaulting to 'general'
@@ -12,6 +12,9 @@ const Sidebar = ({ setSelectedOption, showSidebar, setStores }) => {
     setSelectedItem(itemName);
     setSelectedOption(itemName); 
   };
+
+  // eslint-disable-next-line
+  const { cartItems, addItemToCart, removeItemFromCart } = useCart();
 
   return (
     <>
@@ -34,6 +37,19 @@ const Sidebar = ({ setSelectedOption, showSidebar, setStores }) => {
           </button>
         </div>
 
+        <div>
+          <div className='cart'>
+            Your Cart
+          </div>
+
+          <div className='cart-items'>
+            {cartItems.map((item, index) => (
+              <div key={index}>
+                <li>{item.name}</li>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

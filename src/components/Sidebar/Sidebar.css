@@ -72,3 +72,11 @@
    background-color: rgb(26,128,229);
    color: white;
  }
+
+.cart {
+  text-align: center;
+}
+
+.cart-items {
+  margin: 10px;
+}
