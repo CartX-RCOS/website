@@ -4,9 +4,9 @@ import StoreCard from '../../components/StoreCard/StoreCard';
 
 const AnalyzeStores = () => {
    const [stores, setStores] = useState([]);
-
+   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
    useEffect(() => {
-      fetch('/analyseStores')
+      fetch(`${apiUrl}/analyseStores`)
          .then(response => response.json())
          .then(data => {
             const sortedStores = Object.values(data).sort((a, b) => b.averageAnalysisPoints - a.averageAnalysisPoints);
