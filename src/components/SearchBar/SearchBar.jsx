@@ -13,7 +13,7 @@ const SearchBar = (props) => {
    };
 
    const handleSubmit = async (event) => {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+      const apiUrl = process.env.REACT_APP_API_URL;
       if (searchText !== ""){
          try {
             const response = await axios.post(`${apiUrl}/getPairedItems`, {stores : stores, searchQuery : searchText });

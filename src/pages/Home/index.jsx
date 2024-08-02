@@ -26,7 +26,7 @@ const Home = () => {
   }
 
   const getAddress = async (address) => {
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+    const apiUrl = process.env.REACT_APP_API_URL;
     try {
       const response = await axios.post(`${apiUrl}/convertCoordinates`, { location: address });
       return response.data;

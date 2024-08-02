@@ -4,7 +4,7 @@ import StoreCard from '../../components/StoreCard/StoreCard';
 
 const AnalyzeStores = () => {
    const [stores, setStores] = useState([]);
-   const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+   const apiUrl = process.env.REACT_APP_API_URL;
    useEffect(() => {
       fetch(`${apiUrl}/analyseStores`)
          .then(response => response.json())
