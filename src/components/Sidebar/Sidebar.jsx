@@ -30,7 +30,7 @@ const Sidebar = ({ showSidebar, setStores, cart }) => {
   };
 
   // eslint-disable-next-line
-  const { cartItems, addItemToCart, removeItemFromCart } = useCart();
+  // const { cartItems, addItemToCart, removeItemFromCart } = useCart();
 
   return (
     <>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useCart } from '../../CartProvider';
+// import { useCart } from '../../CartProvider';
 import './Card.css';
 
 const Card = (props) => {
   // eslint-disable-next-line
-  const { cartItems, addItemToCart, removeItemFromCart } = useCart();
-  const [imageSrc, setImageSrc] = useState('');
+  // const { cartItems, addItemToCart, removeItemFromCart } = useCart();
+  // const [imageSrc, setImageSrc] = useState('');
   const [productSize, setProductSize] = useState('');
   const [isClicked, setIsClicked] = useState(false);
 
@@ -66,7 +66,7 @@ const Card = (props) => {
     setIsClicked(!isClicked);
     handleAddToCart(!isClicked);
   };
-  const isInCart = cartItems.some(item => item._id === data._id);
+  // const isInCart = cartItems.some(item => item._id === data._id);
 
   return (
     <>
