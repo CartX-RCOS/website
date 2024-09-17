@@ -11,6 +11,15 @@ const Home = () => {
   const [showSidebar, setShowSidebar] = useState(true);
   const [data, setData] = useState();
   const [stores, setStores] = useState(['walgreens', 'cvs', 'hannaford']);
+  const [cart, setCart] = useState(() => {
+    const savedCart = JSON.parse(localStorage.getItem('cart'));
+    return savedCart ? savedCart : [];
+  });
+
+  useEffect(() => {
+    console.log(cart);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   const parseAddress = (address) => {
     var regex = /([^,]+),\s*([A-Za-z]{2})\s*(\d{5})/;
@@ -60,8 +69,8 @@ const Home = () => {
 
   return (
     <>
-      <Sidebar showSidebar={showSidebar} setStores={setStores}/>
-      <Content className="content" sidebar={showSidebar} data={data}/>
+      <Sidebar showSidebar={showSidebar} setStores={setStores} cart={cart}/>
+      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart}/>
       <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} setData={setData} stores={stores}/>
     </>
   )
