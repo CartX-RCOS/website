@@ -5,6 +5,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import Content from '../../components/Content/Content'
 import axios from 'axios';
 
+
 const Home = () => {
   const [address, setAddress] = useState();
   const [showSidebar, setShowSidebar] = useState(true);
@@ -34,8 +35,9 @@ const Home = () => {
   }
 
   const getAddress = async (address) => {
+    const apiUrl = process.env.REACT_APP_API_URL;
     try {
-      const response = await axios.post("http://localhost:8080/convertCoordinates", { location: address });
+      const response = await axios.post(`${apiUrl}/convertCoordinates`, { location: address });
       return response.data;
     } catch (e) {
       console.log(e);

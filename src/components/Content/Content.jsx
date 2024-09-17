@@ -18,7 +18,6 @@ const Content = (props) => {
     })
   }
 
-
   return (
    <>
     <div className="content-wrapper">

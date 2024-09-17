@@ -1,0 +1,39 @@
+.store-card {
+   display: flex;
+   align-items: flex-start; 
+   border: 1px solid #ccc;
+   padding: 10px; 
+   border-radius: 4px; 
+   background: #fff;
+   margin-bottom: 10px; 
+}
+ 
+ .store-image {
+   width: 125px; 
+   height: auto;
+   border-radius: 2px; 
+   margin-right: 10px; 
+ }
+ 
+ .store-details {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+ }
+ 
+ .store-card-header h2 {
+   font-size: 0.8rem; 
+   margin: 0; 
+ }
+ 
+ .store-card-info p,
+ .store-card-footer p {
+   font-size: 0.7rem; 
+   margin: 2px 0; 
+ }
+ 
+ .store-card-info {
+   border-top: none;
+   padding-top: 0;
+ }
+ 

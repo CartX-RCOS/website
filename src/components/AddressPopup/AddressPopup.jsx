@@ -73,7 +73,7 @@ function AddressPopup(props) {
         props.setAddress(parseAddress(searchQuery));
         setSearchQuery('');
         props.onClose();
-        console.log("the value should be changed now!",parseAddress(searchQuery))
+        // console.log("the value should be changed now!",parseAddress(searchQuery))
         localStorage.setItem('address', parseAddress(searchQuery));
     };
 

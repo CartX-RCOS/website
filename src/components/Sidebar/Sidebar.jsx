@@ -29,6 +29,9 @@ const Sidebar = ({ showSidebar, setStores, cart }) => {
     );
   };
 
+  // eslint-disable-next-line
+  const { cartItems, addItemToCart, removeItemFromCart } = useCart();
+
   return (
     <>
       <div className="sidebar" style={!showSidebar ? { width: "0" } : {}}>
