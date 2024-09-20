@@ -70,7 +70,7 @@ const Home = () => {
   return (
     <>
       <Sidebar showSidebar={showSidebar} setStores={setStores} cart={cart}/>
-      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart}/>
+      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart} cart={cart}/>
       <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} setData={setData} stores={stores}/>
     </>
   )

@@ -1,37 +1,16 @@
-import { React } from 'react';
-import Card from '../Card/Card';
 import './Content.css'
+import ItemSelector from '../ItemSelector/ItemSelector'
 
 const Content = (props) => {
-    
+   
 
-  // adds to cart
-  const addToCart = (product) => {
-    props.setCart(currentCart => [...currentCart, product]);
-  };
+   return (
+      <div>
+         <ItemSelector sidebar={props.sidebar} data={props.data} setCart={props.setCart} cart={props.cart} />
+      </div>
+   )
 
-  //removes from cart
-  const removeFromCart = (product) => {
-    const target_id = product._id;
-    props.setCart(currentCart => {
-      return currentCart.filter(item => item._id !== target_id);
-    })
-  }
-
-  return (
-   <>
-    <div className="content-wrapper">
-      <div className="content" style={!props.sidebar ? { width: "100vw", left: "0%" } : null }>
-        {
-          props.data && props.data.map((item) => (
-            <Card key={item._id} data={item} addToCart={addToCart} removeFromCart={removeFromCart}/>
-          ))
-        }
-      </div>   
-    </div>
-   </>
-  )
 }
 
-export default Content
 
+export default Content
