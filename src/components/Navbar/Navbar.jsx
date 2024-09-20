@@ -18,6 +18,10 @@ const NavBar = (props) => {
     setShowPopup(false);
   };
 
+  const handleAnalyzeClick = () => {
+    props.setOnAnalysis(!props.onAnalysis)
+  }
+
   const address = localStorage.getItem('address');
   const isAddressUndefined = address === undefined || address === null;
 
@@ -56,8 +60,10 @@ const NavBar = (props) => {
             </div>
           )}
           {showPopup && <AddressPopup onClose={handleClosePopup} setAddress={props.setAddress} />}
-
-          <button className="analyze"> Analyze </button>
+          
+          <button className={`analyzeToggle ${props.onAnalysis ? "on" : "off"}`} onClick={handleAnalyzeClick}> 
+            {props.onAnalysis ? "ANALYZE" : "ITEMS"} 
+          </button>
         </div>
       </div>
     </>
