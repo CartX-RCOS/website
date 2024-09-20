@@ -71,7 +71,7 @@ const Home = () => {
   return (
     <>
       <Sidebar showSidebar={showSidebar} setStores={setStores} cart={cart}/>
-      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart} cart={cart}/>
+      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart} cart={cart} onAnalysis={onAnalysis}/>
       <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} setData={setData} stores={stores} onAnalysis={onAnalysis} setOnAnalysis={setOnAnalysis}/>
     </>
   )

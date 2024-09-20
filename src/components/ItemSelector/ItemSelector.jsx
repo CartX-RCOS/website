@@ -20,8 +20,8 @@ const Cart = (props) => {
 
   return (
    <>
-    <div className="content-wrapper">
-      <div className="content" style={!props.sidebar ? { width: "100vw", left: "0%" } : null }>
+    <div className="item-selector-wrapper">
+      <div className="item-selector" style={!props.sidebar ? { width: "100vw", left: "0%" } : null }>
         {
           props.data && props.data.map((item) => (
             <Card key={item._id} data={item} addToCart={addToCart} removeFromCart={removeFromCart}/>

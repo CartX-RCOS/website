@@ -5,8 +5,12 @@ const Content = (props) => {
    
 
    return (
-      <div>
-         <ItemSelector sidebar={props.sidebar} data={props.data} setCart={props.setCart} cart={props.cart} />
+      <div className="content" style={!props.sidebar ? { width: "100vw", left: "0%" } : null }>
+         { props.onAnalysis ? (
+            <h1>Analysis</h1>
+         ) : (
+            <ItemSelector sidebar={props.sidebar} data={props.data} setCart={props.setCart} cart={props.cart} />
+         )}
       </div>
    )
 
