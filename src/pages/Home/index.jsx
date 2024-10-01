@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const Home = () => {
   const [address, setAddress] = useState();
+  const [onAnalysis, setOnAnalysis] = useState(false);
   const [showSidebar, setShowSidebar] = useState(true);
   const [data, setData] = useState();
   const [stores, setStores] = useState(['walgreens', 'cvs', 'hannaford']);
@@ -70,8 +71,8 @@ const Home = () => {
   return (
     <>
       <Sidebar showSidebar={showSidebar} setStores={setStores} cart={cart}/>
-      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart}/>
-      <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} setData={setData} stores={stores}/>
+      <Content className="content" sidebar={showSidebar} data={data} setCart={setCart} cart={cart} onAnalysis={onAnalysis}/>
+      <NavBar changeAddress={setAddress} setShowSidebar={setShowSidebar} setData={setData} stores={stores} onAnalysis={onAnalysis} setOnAnalysis={setOnAnalysis}/>
     </>
   )
 }
