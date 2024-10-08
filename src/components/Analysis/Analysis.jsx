@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import './Analysis.css';
 
 const data = [
@@ -28,23 +29,69 @@ const data = [
       savings: 12.30, 
       bestChoice: true,
       additionalInfo: 'Open 9 AM to 6 PM. Address: 789 Local Rd.'
+   },
+   { 
+      name: 'Grocery King', 
+      distance: 2.5, 
+      priceComparison: 88, 
+      itemAvailability: 95, 
+      savings: 10.00, 
+      bestChoice: false,
+      additionalInfo: 'Opens from 8 AM to 10 PM. Address: 456 King Ave.'
+   },
+   { 
+      name: 'Local Market', 
+      distance: 0.8, 
+      priceComparison: 92, 
+      itemAvailability: 90, 
+      savings: 12.30, 
+      bestChoice: true,
+      additionalInfo: 'Open 9 AM to 6 PM. Address: 789 Local Rd.'
+   },
+   { 
+      name: 'Grocery King', 
+      distance: 2.5, 
+      priceComparison: 88, 
+      itemAvailability: 95, 
+      savings: 10.00, 
+      bestChoice: false,
+      additionalInfo: 'Opens from 8 AM to 10 PM. Address: 456 King Ave.'
+   },
+   { 
+      name: 'Local Market', 
+      distance: 0.8, 
+      priceComparison: 92, 
+      itemAvailability: 90, 
+      savings: 12.30, 
+      bestChoice: true,
+      additionalInfo: 'Open 9 AM to 6 PM. Address: 789 Local Rd.'
    }
 ];
 
 const Analysis = () => {
-   const [showMoreInfo, setShowMoreInfo] = useState(Array(data.length).fill(false));
+   const [selectedStore, setSelectedStore] = useState(null);
 
-   const toggleMoreInfo = (index) => {
-      const newShowMoreInfo = [...showMoreInfo];
-      newShowMoreInfo[index] = !newShowMoreInfo[index];
-      setShowMoreInfo(newShowMoreInfo);
+   const toggleSelect = (index) => {
+      if (selectedStore === index) {
+         setSelectedStore(null); // Deselect if it's already selected
+      } else {
+         setSelectedStore(index); // Select the clicked store
+      }
    };
 
    return (
       <div className="analysis-grid">
          {data.map((store, index) => (
             <div className="analysis-block" key={index}>
-               <h2>{store.name}</h2>
+               <div className="analysis-header">
+                  <h2>{store.name}</h2>
+                  <button
+                     className={`dropdown-arrow ${selectedStore === index ? 'arrow-up' : ''}`}
+                     onClick={() => toggleSelect(index)}
+                  >
+                     {selectedStore === index ? <FaChevronUp /> : <FaChevronDown />}
+                  </button>
+               </div>
                <p className="location">{store.distance} miles away</p>
                <div className="bar">
                   <span>Price Comparison</span>
@@ -62,16 +109,15 @@ const Analysis = () => {
                </div>
                <p className="savings">Potential Savings: <span>${store.savings}</span></p>
                <button className="best-choice">{store.bestChoice ? '✓ Best Choice' : 'Consider'}</button>
-               <button className="more-info" onClick={() => toggleMoreInfo(index)}>
-                  {showMoreInfo[index] ? 'Hide Info' : 'More Info'}
-               </button>
-               {showMoreInfo[index] && (
-                  <div className="additional-info">
-                     <p>{store.additionalInfo}</p>
-                  </div>
-               )}
             </div>
          ))}
+
+         {selectedStore !== null && (
+            <div className="store-info-popup">
+               <h2>{data[selectedStore].name} Info</h2>
+               <p>{data[selectedStore].additionalInfo}</p>
+            </div>
+         )}
       </div>
    );
 };
