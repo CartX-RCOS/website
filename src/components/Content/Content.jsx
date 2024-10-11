@@ -8,7 +8,7 @@ const Content = (props) => {
    return (
       <div className="content" style={!props.sidebar ? { width: "100vw", left: "0%" } : null }>
          { props.onAnalysis ? (
-            <Analysis />
+            <Analysis sidebar={props.sidebar}/>
          ) : (
             <ItemSelector sidebar={props.sidebar} data={props.data} setCart={props.setCart} cart={props.cart} />
          )}

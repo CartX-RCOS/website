@@ -1,25 +1,48 @@
 import React, { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 import './Analysis.css';
 
 const data = [
    { 
-      name: 'SuperMart', 
-      distance: 1.2, 
-      priceComparison: 95, 
-      itemAvailability: 100, 
-      savings: 15.50, 
-      bestChoice: true, 
-      additionalInfo: 'Open 24/7. Address: 123 Market St.'
-   },
-   { 
-      name: 'Grocery King', 
-      distance: 2.5, 
-      priceComparison: 88, 
-      itemAvailability: 95, 
-      savings: 10.00, 
-      bestChoice: false,
-      additionalInfo: 'Opens from 8 AM to 10 PM. Address: 456 King Ave.'
+      name: 'Local Market', 
+      distance: 0.8, 
+      priceComparison: 92, 
+      itemAvailability: 90, 
+      savings: 12.30, 
+      bestChoice: true,
+      comparisonString: "5% Cheaper than average",
+      items: [
+         {
+            name: "Milk",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Gatorade",
+            contains: false,
+            price: 0.0
+         },
+         {
+            name: "Cheese",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Coke",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Milk",
+            contains: false,
+            price: 0.0
+         },
+         {
+            name: "Cheese",
+            contains: false,
+            price: 0.0
+         }
+      ],    
    },
    { 
       name: 'Local Market', 
@@ -28,16 +51,39 @@ const data = [
       itemAvailability: 90, 
       savings: 12.30, 
       bestChoice: true,
-      additionalInfo: 'Open 9 AM to 6 PM. Address: 789 Local Rd.'
-   },
-   { 
-      name: 'Grocery King', 
-      distance: 2.5, 
-      priceComparison: 88, 
-      itemAvailability: 95, 
-      savings: 10.00, 
-      bestChoice: false,
-      additionalInfo: 'Opens from 8 AM to 10 PM. Address: 456 King Ave.'
+      comparisonString: "5% Cheaper than average",
+      items: [
+         {
+            name: "Milk",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Gatorade",
+            contains: false,
+            price: 0.0
+         },
+         {
+            name: "Cheese",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Coke",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Milk",
+            contains: false,
+            price: 0.0
+         },
+         {
+            name: "Cheese",
+            contains: false,
+            price: 0.0
+         }
+      ],    
    },
    { 
       name: 'Local Market', 
@@ -46,37 +92,51 @@ const data = [
       itemAvailability: 90, 
       savings: 12.30, 
       bestChoice: true,
-      additionalInfo: 'Open 9 AM to 6 PM. Address: 789 Local Rd.'
-   },
-   { 
-      name: 'Grocery King', 
-      distance: 2.5, 
-      priceComparison: 88, 
-      itemAvailability: 95, 
-      savings: 10.00, 
-      bestChoice: false,
-      additionalInfo: 'Opens from 8 AM to 10 PM. Address: 456 King Ave.'
-   },
-   { 
-      name: 'Local Market', 
-      distance: 0.8, 
-      priceComparison: 92, 
-      itemAvailability: 90, 
-      savings: 12.30, 
-      bestChoice: true,
-      additionalInfo: 'Open 9 AM to 6 PM. Address: 789 Local Rd.'
+      comparisonString: "5% Cheaper than average",
+      items: [
+         {
+            name: "Milk",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Gatorade",
+            contains: false,
+            price: 0.0
+         },
+         {
+            name: "Cheese",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Coke",
+            contains: true,
+            price: 20.00
+         },
+         {
+            name: "Milk",
+            contains: false,
+            price: 0.0
+         },
+         {
+            name: "Cheese",
+            contains: false,
+            price: 0.0
+         }
+      ],    
    }
+   
 ];
 
-const Analysis = () => {
+const Analysis = ({sidebar}) => {
    const [selectedStore, setSelectedStore] = useState(null);
-   const [isExiting, setIsExiting] = useState(false); // State for managing the slide-down animation
+   const [isExiting, setIsExiting] = useState(false);
 
 
    const toggleSelect = (index) => {
       if (selectedStore === index) {
          setIsExiting(true); 
-         // Wait for animation to complete before setting the store to null
          setTimeout(() => {
             setSelectedStore(null); 
             setIsExiting(false); 
@@ -97,7 +157,7 @@ const Analysis = () => {
                      className={`dropdown-arrow ${selectedStore === index ? 'arrow-up' : ''}`}
                      onClick={() => toggleSelect(index)}
                   >
-                     {selectedStore === index ? <FaChevronUp /> : <FaChevronDown />}
+                     <FaChevronDown />
                   </button>
                </div>
                <p className="location">{store.distance} miles away</p>
@@ -121,11 +181,31 @@ const Analysis = () => {
          ))}
 
          {selectedStore !== null && (
-            <div className={`store-info-popup ${isExiting ? 'exit' : ''}`}>
-               <h2>{data[selectedStore].name} Info</h2>
-               <p>{data[selectedStore].additionalInfo}</p>
+            <div className={`store-info-popup ${isExiting ? 'exit' : ''}`} style={!sidebar ? { width: "100vw", left: "0%" } : null }>
+               <h2>{data[selectedStore].name} Details</h2>
+               <div className="sub-info">
+                  <p id="distance">Distance: {data[selectedStore].distance} miles</p>
+                  <p id="comparisonString">{data[selectedStore].comparisonString}</p>
+               </div>
+
+               <div className="items-grid">
+                  {data[selectedStore].items.map((item, index) => (
+                     <div key={index} className="item-card">
+                        <p>{item.name}</p>
+                        {/* Check if item is available */}
+                        {item.contains ? (
+                           <div className="price">${item.price}</div>
+                        ) : (
+                           <div className="unavailable">
+                              <span>✖ </span>N/A 
+                           </div>
+                        )}
+                     </div>
+                  ))}
+               </div>
             </div>
          )}
+
       </div>
    );
 };
