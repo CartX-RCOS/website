@@ -70,12 +70,20 @@ const data = [
 
 const Analysis = () => {
    const [selectedStore, setSelectedStore] = useState(null);
+   const [isExiting, setIsExiting] = useState(false); // State for managing the slide-down animation
+
 
    const toggleSelect = (index) => {
       if (selectedStore === index) {
-         setSelectedStore(null); // Deselect if it's already selected
+         setIsExiting(true); 
+         // Wait for animation to complete before setting the store to null
+         setTimeout(() => {
+            setSelectedStore(null); 
+            setIsExiting(false); 
+         }, 400); 
       } else {
-         setSelectedStore(index); // Select the clicked store
+         setSelectedStore(index); 
+         setIsExiting(false); 
       }
    };
 
@@ -113,7 +121,7 @@ const Analysis = () => {
          ))}
 
          {selectedStore !== null && (
-            <div className="store-info-popup">
+            <div className={`store-info-popup ${isExiting ? 'exit' : ''}`}>
                <h2>{data[selectedStore].name} Info</h2>
                <p>{data[selectedStore].additionalInfo}</p>
             </div>
