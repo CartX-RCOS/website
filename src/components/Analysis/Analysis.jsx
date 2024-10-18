@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown, FaExternalLinkAlt  } from 'react-icons/fa';
 import './Analysis.css';
 
 const data = [
@@ -15,32 +15,38 @@ const data = [
          {
             name: "Milk",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Gatorade",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          },
          {
             name: "Cheese",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Coke",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Milk",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          },
          {
             name: "Cheese",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          }
       ],    
    },
@@ -56,32 +62,38 @@ const data = [
          {
             name: "Milk",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Gatorade",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          },
          {
             name: "Cheese",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Coke",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Milk",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          },
          {
             name: "Cheese",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          }
       ],    
    },
@@ -97,32 +109,38 @@ const data = [
          {
             name: "Milk",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Gatorade",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          },
          {
             name: "Cheese",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Coke",
             contains: true,
-            price: 20.00
+            price: 20.00,
+            url: "https://www.hannaford.com/product/fiji-water/803739"
          },
          {
             name: "Milk",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          },
          {
             name: "Cheese",
             contains: false,
-            price: 0.0
+            price: 20.00,
+            url: ""
          }
       ],    
    }
@@ -194,7 +212,14 @@ const Analysis = ({sidebar}) => {
                         <p>{item.name}</p>
                         {/* Check if item is available */}
                         {item.contains ? (
-                           <div className="price">${item.price}</div>
+                           <div className="available"> 
+                              <div className="price">${item.price}</div>
+                              <div className="externalLink">
+                                 <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                    <FaExternalLinkAlt />
+                                 </a>
+                              </div>
+                           </div>
                         ) : (
                            <div className="unavailable">
                               <span>✖ </span>N/A 
