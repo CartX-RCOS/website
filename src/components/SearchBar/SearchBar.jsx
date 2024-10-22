@@ -16,7 +16,7 @@ const SearchBar = (props) => {
       const apiUrl = process.env.REACT_APP_API_URL;
       if (searchText !== ""){
          try {
-            const response = await axios.put(`${apiUrl}/vectorizeStore`, {stores : stores, searchQuery : searchText });
+            const response = await axios.put(`${apiUrl}/embeddedResults`, {stores : stores, searchQuery : searchText });
             console.log(response.data);
             props.setData(response.data);
           } catch (e) {
