@@ -61,8 +61,8 @@ const NavBar = (props) => {
           )}
           {showPopup && <AddressPopup onClose={handleClosePopup} setAddress={props.setAddress} />}
           
-          <button className={`analyzeToggle ${props.onAnalysis ? "on" : "off"}`} onClick={handleAnalyzeClick}> 
-            {props.onAnalysis ? "ANALYZE" : "ITEMS"} 
+          <button className={`analyzeToggle ${props.onAnalysis ? "off" : "on"}`} onClick={handleAnalyzeClick}> 
+            {props.onAnalysis ? "ITEMS" : "ANALYZE"} 
           </button>
         </div>
       </div>

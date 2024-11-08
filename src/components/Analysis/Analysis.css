@@ -85,6 +85,18 @@ h2 {
    margin-top: 8px;
 }
 
+.instacart-supported {
+   font-size: 1.1rem;
+}
+
+.instacart-supported.yes {
+   color: green;
+}
+
+.instacart-supported.no {
+   color: red;
+}
+
 button.best-choice {
    background-color: #fff;
    border: 1px solid #000;
@@ -95,7 +107,17 @@ button.best-choice {
    margin-top: 10px;
    width: 100%;
    box-sizing: border-box;
+   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
+button.best-choice:hover {
+   background-color: #eee; 
+   transform: translateY(-2px); 
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+button.best-choice:focus {
+   outline: none;
+}
+
 .store-info-popup {
    position: fixed; 
    bottom: 0; 
