@@ -18,7 +18,6 @@ const Home = () => {
   });
 
   useEffect(() => {
-    console.log(cart);
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
