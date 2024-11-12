@@ -258,7 +258,17 @@ const Analysis = ({sidebar}) => {
 
          {selectedStore !== null && (
             <div className={`store-info-popup ${isExiting ? 'exit' : ''}`} style={!sidebar ? { width: "100vw", left: "0%" } : null }>
-               <h2>{data[selectedStore].name} Details</h2>
+               <div className="main-info">
+                  <h2>{data[selectedStore].name} Details</h2>
+                  <div className='orderRedirect'>
+                     <button className="best-choice" onClick={() => handleBestChoiceClick(data[selectedStore])}>
+                     {/* <a href={"https://google.com"} target="_blank" rel="noopener noreferrer"> */}
+                        <span>Order </span>
+                        <FaExternalLinkAlt id="redirect"/>
+                     {/* </a> */}
+                     </button>
+                  </div>
+               </div>
                <div className="sub-info">
                   <p id="distance">Distance: {data[selectedStore].distance} miles</p>
                   <p id="comparisonString">{data[selectedStore].comparisonString}</p>

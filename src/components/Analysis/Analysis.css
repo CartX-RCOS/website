@@ -155,6 +155,26 @@ button.best-choice:focus {
    }
 }
 
+.store-info-popup .orderRedirect {
+   font-size: 1.5em; 
+   font-weight: bold;
+   color: black; 
+   margin: 10px 0;
+}
+
+.store-info-popup .orderRedirect button {
+   background: none;    
+   border: none; 
+   color: #007bff; 
+   font-size: 1.5rem; 
+   cursor: pointer; 
+   padding: 0; 
+}
+
+.store-info-popup #redirect {
+   margin-left: 5px; 
+}
+
 .store-info-popup.exit {
    animation: slide-down 0.4s ease-in-out;
 }
@@ -169,7 +189,8 @@ button.best-choice:focus {
    color: #333;
 }
 
-.store-info-popup .sub-info {
+.store-info-popup .sub-info, 
+.store-info-popup .main-info {
    display: flex;
    justify-content: space-between; 
    align-items: center; 
