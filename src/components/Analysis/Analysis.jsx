@@ -150,7 +150,7 @@ const data = [
    
 ];
 
-const Analysis = ({sidebar}) => {
+const Analysis = ({sidebar, cart}) => {
    const [selectedStore, setSelectedStore] = useState(null);
    const [isExiting, setIsExiting] = useState(false);
    const [shoppingLinks, setShoppingLinks] = useState({});
@@ -194,6 +194,20 @@ const Analysis = ({sidebar}) => {
       setShoppingLinks((prevLinks) => ({ ...prevLinks, [store.name]: link }));
       window.open(link, '_blank');
    };
+
+   async function getAnalysisData () {
+      try {
+         const response = await fetch("http://localhost:8080/analyseStores", {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ cart: cart })
+         });
+      } catch (error) {
+         console.error("Error getting analysis data:", error);
+      }
+   }
 
    async function getStoreShoppingLink(store) {
       try {
