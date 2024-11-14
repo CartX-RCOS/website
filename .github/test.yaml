@@ -1,0 +1,46 @@
+# Read more about setting it up
+# https://medium.com/@ljmocic/deploying-react-application-to-aws-s3-using-github-actions-85addacaeace
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      # Frontend steps
+      - name: Install dependencies (Frontend)
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Install react-icons (Frontend)
+        run: npm install react-icons --save
+        working-directory: ./frontend
+
+      - name: Build (Frontend)
+        run: npm run build
+        working-directory: ./frontend
+
+        env:
+          CI: true
+
+      # Backend steps
+      # - name: Install dependencies (Backend)
+      #   run: npm install
+      #   working-directory: ./backend
+
+      # - name: Build (Backend)
+      #   run: npm start
+      #   working-directory: ./backend
+
+      #   env:
+      #     CI: true
