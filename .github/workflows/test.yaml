@@ -20,15 +20,12 @@ jobs:
       # Frontend steps
       - name: Install dependencies (Frontend)
         run: npm install
-        working-directory: ./frontend
 
       - name: Install react-icons (Frontend)
         run: npm install react-icons --save
-        working-directory: ./frontend
 
       - name: Build (Frontend)
         run: npm run build
-        working-directory: ./frontend
 
         env:
           CI: true
