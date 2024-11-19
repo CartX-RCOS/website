@@ -207,15 +207,13 @@
 
 .item {
   display: flex;
+  position: relative;
   align-items: center;
+  justify-content: space-between; 
   margin-bottom: 10px;
   width: 100%;
-  padding-right: 20px;  
-  border-bottom: 1px solid rgb(165, 165, 165)
-}
-
-.item:last-child {
-  margin-bottom: 0; 
+  /* padding-right: 20px;   */
+  border-bottom: 1px solid rgb(165, 165, 165);
 }
 
 .item-icon {
@@ -225,8 +223,18 @@
   border-radius: 8px; 
   transform: translateY(-5px);
 }
- 
- 
+
+.item-info {
+  margin-right: 50px;
+  flex-grow: 1;      /* This ensures the item info takes up remaining space */
+  min-width: 0;      /* Ensures that it doesn't expand too much */
+  overflow: hidden;  /* Prevents overflow of text */
+}
+
+.item:last-child {
+  margin-bottom: 0; 
+}
+
 .item-info strong {
   display: block;
   color: #333;
@@ -239,4 +247,28 @@
   margin-top: 2px;
   line-height: 1.2;
   margin-bottom: 3px;
+}
+
+.remove-button {
+  position: absolute;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;    
+  width: 50px;        
+  height: 50px;       
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1; 
+  height: 100%;
+}
+
+.remove-button:hover {
+  opacity: 0.8;
+}
+
+.remove-button:focus {
+  outline: none;
 }

@@ -3,9 +3,10 @@ import cvs_logo from '../../assets/Store-logos/cvs.png';
 import shoprite_logo from '../../assets/Store-logos/shoprite.png';
 import walgreens_logo from '../../assets/Store-logos/walgreens.png';
 import hannaford_logo from '../../assets/Store-logos/hannaford.png';
+import { CiSquareRemove } from "react-icons/ci";
 import './Sidebar.css';
 
-const Sidebar = ({ showSidebar, setStores, cart }) => {
+const Sidebar = ({ showSidebar, setStores, cart, setCart }) => {
   const [selectedStores, setSelectedStores] = useState([
     { name: 'cvs', logo: cvs_logo, checked: true }, // Set all checked by default
     { name: 'shoprite', logo: shoprite_logo, checked: true },
@@ -23,6 +24,11 @@ const Sidebar = ({ showSidebar, setStores, cart }) => {
     setSelectedStores(current =>
       current.map(item => (item.name === store ? { ...item, checked: !item.checked } : item))
     );
+  };
+
+  const removeCartItem = (itemName) => {
+    const updatedCart = cart.filter(item => item.name !== itemName);
+    setCart(updatedCart);
   };
 
   // eslint-disable-next-line
@@ -58,8 +64,13 @@ const Sidebar = ({ showSidebar, setStores, cart }) => {
                     <img src={item.images_links[0]} alt="Item Icon" className="item-icon" />
                     <div className="item-info">
                       <strong>{item.name}</strong>
-                      {/* <p>{item.name}</p> */}
                     </div>
+                    <button 
+                      onClick={() => { removeCartItem(item.name); }} 
+                      className="remove-button"
+                    >
+                      <CiSquareRemove />
+                    </button>
                   </div>
                 ))}
               </div>
