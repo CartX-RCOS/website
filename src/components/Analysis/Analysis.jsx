@@ -1,185 +1,64 @@
-import React, { useState } from 'react';
-import { FaChevronDown, FaExternalLinkAlt  } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
+import { FaChevronDown, FaExternalLinkAlt } from 'react-icons/fa';
 import './Analysis.css';
 
-const data = [
-   { 
-      name: 'Local Market', 
-      distance: 0.8, 
-      priceComparison: 92, 
-      itemAvailability: 90, 
-      savings: 12.30, 
-      bestChoice: true,
-      comparisonString: "5% Cheaper than average",
-      url: "https://google.com",
-      items: [
-         {
-            name: "Milk",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Gatorade",
-            contains: false,
-            price: 20.00,
-            url: ""
-         },
-         {
-            name: "Cheese",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Coke",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Milk",
-            contains: false,
-            price: 20.00,
-            url: ""
-         },
-         {
-            name: "Cheese",
-            contains: false,
-            price: 20.00,
-            url: ""
-         }
-      ],    
-   },
-   { 
-      name: 'Super Target', 
-      distance: 0.8, 
-      priceComparison: 92, 
-      itemAvailability: 90, 
-      savings: 12.30, 
-      bestChoice: true,
-      comparisonString: "5% Cheaper than average",
-      url: "https://google.com",
-      items: [
-         {
-            name: "Milk",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Gatorade",
-            contains: false,
-            price: 20.00,
-            url: ""
-         },
-         {
-            name: "Cheese",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Coke",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Milk",
-            contains: false,
-            price: 20.00,
-            url: ""
-         },
-         {
-            name: "Cheese",
-            contains: false,
-            price: 20.00,
-            url: ""
-         }
-      ],    
-   },
-   { 
-      name: 'Local Market', 
-      distance: 0.8, 
-      priceComparison: 92, 
-      itemAvailability: 90, 
-      savings: 12.30, 
-      bestChoice: false,
-      comparisonString: "5% Cheaper than average",
-      url: "https://google.com",
-      items: [
-         {
-            name: "Milk",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Gatorade",
-            contains: false,
-            price: 20.00,
-            url: ""
-         },
-         {
-            name: "Cheese",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Coke",
-            contains: true,
-            price: 20.00,
-            url: "https://www.hannaford.com/product/fiji-water/803739"
-         },
-         {
-            name: "Milk",
-            contains: false,
-            price: 20.00,
-            url: ""
-         },
-         {
-            name: "Cheese",
-            contains: false,
-            price: 20.00,
-            url: ""
-         }
-      ],    
-   }
-   
-];
-
-const Analysis = ({sidebar}) => {
+const Analysis = ({ sidebar, cart }) => {
+   const [data, setData] = useState([]);
    const [selectedStore, setSelectedStore] = useState(null);
    const [isExiting, setIsExiting] = useState(false);
    const [shoppingLinks, setShoppingLinks] = useState({});
+   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null);
 
+   useEffect(() => {
+      const fetchData = async () => {
+         try {
+            const apiUrl = process.env.REACT_APP_API_URL;
+            const response = await fetch(`${apiUrl}/analyseStores`, {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json'
+               },
+               body: JSON.stringify({ cart })
+            });
 
-   const toggleSelect = (index) => {
-      if (selectedStore === index) {
+            if (!response.ok) {
+               throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            setData(result);
+            setLoading(false);
+         } catch (err) {
+            setError(err.message);
+            setLoading(false);
+         }
+      };
+
+      fetchData();
+   }, [cart]);
+
+   const toggleSelect = (store) => {
+      if (selectedStore === store) {
          setIsExiting(true); 
          setTimeout(() => {
             setSelectedStore(null); 
             setIsExiting(false); 
          }, 400); 
       } else {
-         setSelectedStore(index); 
+         setSelectedStore(store); 
          setIsExiting(false); 
       }
    };
 
-   function isInstacartSupported(storeName) {
-      let supported = ["Market 32", "ALDI", "Price Rite", "ShopRite", "Price Chopper", "Hannaford", "Tops Markets", "Market Bistro", "Restaurant Depot", "Target", "Kinney Drugs"]
-      
-      for (let i = 0; i < supported.length; i++) {
-         if (storeName.includes(supported[i])) {
-            return true;
-         }
-      }
-     
-     return false;   
-   }
+   const isInstacartSupported = (storeName) => {
+      const supported = [
+         "Market 32", "ALDI", "Price Rite", "ShopRite", "Price Chopper",
+         "Hannaford", "Tops Markets", "Market Bistro", "Restaurant Depot", 
+         "Target", "Kinney Drugs"
+      ];
+      return supported.some(supportedStore => storeName.includes(supportedStore));
+   };
 
    const handleBestChoiceClick = async (store) => {
       if (shoppingLinks[store.name]) {
@@ -195,9 +74,10 @@ const Analysis = ({sidebar}) => {
       window.open(link, '_blank');
    };
 
-   async function getStoreShoppingLink(store) {
+   const getStoreShoppingLink = async (store) => {
       try {
-         const response = await fetch("http://localhost:8080/getInstacartShoppingLink", {
+         const apiUrl = process.env.REACT_APP_API_URL;
+         const response = await fetch(`${apiUrl}/getInstacartShoppingLink`, {
             method: 'POST',
             headers: {
                'Content-Type': 'application/json'
@@ -215,22 +95,25 @@ const Analysis = ({sidebar}) => {
          console.error("Error fetching the Instacart shopping link:", error);
          return store.url;
       }
-   }
+   };
+
+   if (loading) return <p>Loading...</p>;
+   if (error) return <p>Error: {error}</p>;
 
    return (
       <div className="analysis-grid">
-         {data.map((store, index) => (
+         {Object.values(data).map((store, index) => (
             <div className="analysis-block" key={index}>
                <div className="analysis-header">
                   <h2>{store.name}</h2>
                   <button
-                     className={`dropdown-arrow ${selectedStore === index ? 'arrow-up' : ''}`}
-                     onClick={() => toggleSelect(index)}
+                     className={`dropdown-arrow ${selectedStore === store.name ? 'arrow-up' : ''}`}
+                     onClick={() => toggleSelect(store.name)}
                   >
                      <FaChevronDown />
                   </button>
                </div>
-               <p className="location">{store.distance} miles away</p>
+               <p className="location">{store.distance.toFixed(2)} miles away</p>
                <div className="bar">
                   <span>Price Comparison</span>
                   <div className="progress">
@@ -245,8 +128,10 @@ const Analysis = ({sidebar}) => {
                   </div>
                   <span>{store.itemAvailability}%</span>
                </div>
-               <p className="savings">Potential Savings: <span>${store.savings}</span></p>
-               <p className={`instacart-supported ${isInstacartSupported(store.name) ? "yes":"no"}`}>Instacart Supported {isInstacartSupported(store.name) ? "✓" : "✖"}</p>
+               <p className="savings">Potential Savings: <span>${store.savings.toFixed(2)}</span></p>
+               <p className={`instacart-supported ${isInstacartSupported(store.name) ? "yes":"no"}`}>
+                  Instacart Supported {isInstacartSupported(store.name) ? "✓" : "✖"}
+               </p>
                <button className="best-choice" onClick={() => handleBestChoiceClick(store)}>
                   {store.bestChoice ? '✓ Best Choice ' : 'Consider '}
                   <span style={{ marginLeft: '8px' }}>
@@ -260,7 +145,7 @@ const Analysis = ({sidebar}) => {
             <div className={`store-info-popup ${isExiting ? 'exit' : ''}`} style={!sidebar ? { width: "100vw", left: "0%" } : null }>
                <h2>{data[selectedStore].name} Details</h2>
                <div className="sub-info">
-                  <p id="distance">Distance: {data[selectedStore].distance} miles</p>
+                  <p id="distance">Distance: {data[selectedStore].distance.toFixed(2)} miles</p>
                   <p id="comparisonString">{data[selectedStore].comparisonString}</p>
                </div>
 
@@ -268,15 +153,16 @@ const Analysis = ({sidebar}) => {
                   {data[selectedStore].items.map((item, index) => (
                      <div key={index} className="item-card">
                         <p>{item.name}</p>
-                        {/* Check if item is available */}
-                        {item.contains ? (
+                        {item.contains && item.price != 0 ? (
                            <div className="available"> 
                               <div className="price">${item.price}</div>
-                              <div className="externalLink">
-                                 <a href={item.url} target="_blank" rel="noopener noreferrer">
-                                    <FaExternalLinkAlt />
-                                 </a>
-                              </div>
+                                 {item.url != "" ? (
+                                    <div className="externalLink">
+                                       <a href={item.url} target="_blank" rel="noopener noreferrer">
+                                          <FaExternalLinkAlt />
+                                       </a>
+                                    </div>
+                                 ) : (<div></div>)}
                            </div>
                         ) : (
                            <div className="unavailable">
@@ -288,7 +174,6 @@ const Analysis = ({sidebar}) => {
                </div>
             </div>
          )}
-
       </div>
    );
 };

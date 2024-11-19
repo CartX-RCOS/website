@@ -27,6 +27,7 @@
    justify-content: space-between;
    width: 100%;
    align-items: center;
+   text-transform: capitalize;
 }
 
 .dropdown-arrow {
@@ -131,6 +132,7 @@ button.best-choice:focus {
    transition: all 0.4s;
    max-height: 80vh; /* Prevent overflow if there are too many items */
    overflow-y: auto; /* Enable scrolling if content exceeds height */
+   text-transform: capitalize;
 }
 
 @keyframes slide-up {
