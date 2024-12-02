@@ -57,7 +57,7 @@ const Analysis = ({ sidebar, cart }) => {
          "Hannaford", "Tops Markets", "Market Bistro", "Restaurant Depot", 
          "Target", "Kinney Drugs"
       ];
-      return supported.some(supportedStore => storeName.includes(supportedStore));
+      return supported.some(supportedStore => storeName.toLowerCase().includes(supportedStore.toLowerCase()));
    };
 
    const handleBestChoiceClick = async (store) => {
