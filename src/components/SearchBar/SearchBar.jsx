@@ -17,7 +17,6 @@ const SearchBar = (props) => {
       if (searchText !== ""){
          try {
             const response = await axios.put(`${apiUrl}/embeddedResults`, {stores : stores, searchQuery : searchText });
-            console.log(response.data);
             props.setData(response.data);
           } catch (e) {
             console.log(e);

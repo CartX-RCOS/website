@@ -19,6 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
+    
   }, [cart]);
 
   const parseAddress = (address) => {
